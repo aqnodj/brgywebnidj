@@ -14,15 +14,8 @@
             <img src="../logonav.png" alt="Logo">
         </div>
         <ul>
-            <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="#"><i class="fas fa-user"></i> New Residents</a></li>
-            <li><a href="#"><i class="fas fa-home"></i> Resident Information</a></li>
-            <li><a href="#"><i class="fas fa-cog"></i> Resident Records</a></li>
-            <li><a href="#"><i class="fas fa-cog"></i> Blotter Reports</a></li>
-            <li><a href="#"><i class="fas fa-cog"></i> Residents List</a></li>
-            <li><a href="#"><i class="fas fa-cog"></i> Report</a></li>
-            <li><a href="#"><i class="fas fa-cog"></i> Certification</a></li>
-            <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            <li><a href="#"><i class="fas fa-home"></i> Staff Dashboard</a></li>
+          
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
