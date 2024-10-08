@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2024 at 04:21 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Oct 08, 2024 at 11:35 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `brgydb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `purok_population`
+--
+
+CREATE TABLE `purok_population` (
+  `id` int(11) NOT NULL,
+  `purok_name` varchar(50) NOT NULL,
+  `population` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `purok_population`
+--
+
+INSERT INTO `purok_population` (`id`, `purok_name`, `population`) VALUES
+(1, 'Purok 1', 120),
+(2, 'Purok 2', 150),
+(3, 'Purok 3', 100),
+(4, 'Purok 4', 130),
+(5, 'Purok 5', 90),
+(6, 'Purok 6', 160),
+(7, 'Purok 7', 110);
 
 -- --------------------------------------------------------
 
@@ -54,6 +79,12 @@ INSERT INTO `users` (`id`, `firstname`, `middlename`, `lastname`, `suffix`, `con
 --
 
 --
+-- Indexes for table `purok_population`
+--
+ALTER TABLE `purok_population`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -63,6 +94,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `purok_population`
+--
+ALTER TABLE `purok_population`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
