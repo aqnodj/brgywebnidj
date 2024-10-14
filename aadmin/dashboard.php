@@ -14,16 +14,14 @@
             <img src="../logonav.png" alt="Logo">
         </div>
         <ul>
-            
-                <li><a href="dashboard.php"><i class="fas fa-home"></i> Staff Dashboard</a></li>
-                <li><a href="staff.php"><i class="fas fa-sign-out-alt"></i> Barangay Staff</a></li>
-                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-
+            <li><a href="dashboard.php"><i class="fas fa-home"></i> Admin Dashboard</a></li>
+            <li><a href="staff.php"><i class="fas fa-home"></i> Manage Staff</a></li>
+            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
     <div id="content">
         <button id="toggle-btn"><i class="fas fa-bars"></i></button>
-        
+        <h1>Admin Dashboard</h1>
     </div>
 </body>
 </html>
