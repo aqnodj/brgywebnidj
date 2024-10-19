@@ -10,19 +10,19 @@
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
     <style>
-        /* Sidebar styles */
+        
         #sidebar {
-            width: 250px; /* Set sidebar width */
-            height: 100vh; /* Full height */
-            background-color: #f8f9fa; /* Background color */
-            border-right: 1px solid #dee2e6; /* Optional: sidebar border */
-            position: fixed; /* Keep sidebar fixed */
-            top: 0; /* Align to the top */
-            left: 0; /* Align to the left */
+            width: 250px; 
+            height: 100vh; 
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
             z-index: 1000; /* Ensure the sidebar is above other content */
         }
 
-        /* Content styles */
+       
         #content {
             margin-left: 250px; /* Set margin for content to avoid overlap */
         }
@@ -35,10 +35,10 @@
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Admin Dashboard</a></li>
-            <li><a href="staff.php"><i class="fas fa-users"></i> Manage Staff</a></li>
-            <li><a href="announcement.php"><i class="fas fa-bullhorn"></i> Manage Announcement</a></li>
+            <li><a href="staff.php"><i class="fas fa-home"></i> Manage Staff</a></li>
+            <li><a href="announcement.php"><i class="fas fa-home"></i> Manage Announcement</a></li>
+            <li><a href="manage_blotter_report.php"><i class="fas fa-home"></i> Manage Blotter Report</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
     </div>
     
     <div id="content">
@@ -61,7 +61,7 @@
                 <h3>Announcements List</h3>
                 <div class="list-group" id="announcementList">
                     <?php
-                    // Include database connection
+                   
                     include '../connections.php';
 
                     // Insert, Update, and Delete Logic
@@ -107,7 +107,6 @@
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<div class='list-group-item d-flex justify-content-between align-items-center'>";
                         echo "<div class='me-auto'>";
-                        echo "<strong>🐾 Pawville Annual Dog League Announcement 🐾</strong><br>"; // Sample bold title with emojis
                         echo nl2br(htmlspecialchars($row['message'])) . "<br>"; // Message with line breaks
                         echo "<small>Posted on: " . $row['date'] . "</small>";
                         echo "</div>";

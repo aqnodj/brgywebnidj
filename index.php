@@ -83,56 +83,94 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 // Redirect to login page
                 header("Location: login.php"); // Change to the correct login page URL
-                exit; // Ensure no further code is executed
+                exit; 
             }
         }
     }
 }
 ?>
 
+<!-- Include Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
     .error {
         color: red;
     }
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .form-box {
+        background-color: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        max-width: 500px;
+        width: 100%;
+    }
 </style>
 
-<br>
-
-<!-- HTML form -->
 <div class="form-container">
-    <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <div class="form-box">
+        <!-- Form inside the box -->
+        <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
 
-        First Name: <input type="text" name="fName" placeholder="First Name" value="<?php echo htmlspecialchars($fName); ?>"> <br>
-        <span class="error"><?php echo $fnameErr; ?></span> <br>
+            <!-- Name Fields in one row -->
+            <div class="row mb-3">
+                <div class="col">
+                    <input type="text" class="form-control" name="fName" placeholder="First Name" value="<?php echo htmlspecialchars($fName); ?>">
+                    <span class="error"><?php echo $fnameErr; ?></span>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="mName" placeholder="Middle Name" value="<?php echo htmlspecialchars($mName); ?>">
+                    <span class="error"><?php echo $mnameErr; ?></span>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="lName" placeholder="Last Name" value="<?php echo htmlspecialchars($lName); ?>">
+                    <span class="error"><?php echo $lnameErr; ?></span>
+                </div>
+            </div>
 
-        Middle Name: <input type="text" name="mName" placeholder="Middle Name" value="<?php echo htmlspecialchars($mName); ?>"> <br>
-        <span class="error"><?php echo $mnameErr; ?></span> <br>
+            <!-- Other fields -->
+            <div class="mb-3">
+                <input type="text" class="form-control" name="suffix" placeholder="Suffix" value="<?php echo htmlspecialchars($suffix); ?>">
+                <span class="error"><?php echo $suffixErr; ?></span>
+            </div>
 
-        Last Name: <input type="text" name="lName" placeholder="Last Name" value="<?php echo htmlspecialchars($lName); ?>"> <br>
-        <span class="error"><?php echo $lnameErr; ?></span> <br>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="contact" placeholder="Contact Number" value="<?php echo htmlspecialchars($contact); ?>">
+                <span class="error"><?php echo $contactErr; ?></span>
+            </div>
 
-        Suffix: <input type="text" name="suffix" placeholder="Suffix" value="<?php echo htmlspecialchars($suffix); ?>"> <br>
-        <span class="error"><?php echo $suffixErr; ?></span> <br>
+            <div class="mb-3">
+                <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>">
+                <span class="error"><?php echo $emailErr; ?></span>
+            </div>
 
-        Contact: <input type="text" name="contact" placeholder="Contact Number" value="<?php echo htmlspecialchars($contact); ?>"> <br>
-        <span class="error"><?php echo $contactErr; ?></span> <br>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+                <span class="error"><?php echo $passwordErr; ?></span>
+            </div>
 
-        Email: <input type="text" name="email" placeholder="Email" value="<?php echo htmlspecialchars($email); ?>"> <br>
-        <span class="error"><?php echo $emailErr; ?></span> <br>
+            <div class="mb-3">
+                <input type="password" class="form-control" name="cpassword" placeholder="Confirm Password">
+                <span class="error"><?php echo $cpasswordErr; ?></span>
+            </div>
 
-        Password: <input type="password" name="password" placeholder="Password"> <br>
-        <span class="error"><?php echo $passwordErr; ?></span> <br>
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
 
-        Confirm Password: <input type="password" name="cpassword" placeholder="Confirm Password"> <br>
-        <span class="error"><?php echo $cpasswordErr; ?></span> <br>
+        <hr>
 
-        <input type="submit" value="Submit">
-
-    </form>
-</div>
-
-<hr>
-
-<div class="login-note">
-    <p>Already have an account? <a href="login.php">Login</a>.</p>
+        <div class="login-note">
+            <p>Already have an account? <a href="login.php">Login</a>.</p>
+        </div>
+    </div>
 </div>

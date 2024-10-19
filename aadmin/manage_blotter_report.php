@@ -1,7 +1,7 @@
 <?php
-include '../connections.php'; // Include the database connection
+include '../connections.php';
 
-// Check if the form to assign a meeting is submitted
+// Check if a form is submitted
 if (isset($_POST['assign_meeting'])) {
     $blotter_id = $_POST['blotter_id'];
     $meeting_date = $_POST['meeting_date'];
@@ -16,11 +16,11 @@ if (isset($_POST['assign_meeting'])) {
     exit();
 }
 
-// Check if the form to cancel a meeting is submitted
+// Check kung yung cancel ay naisubmit
 if (isset($_POST['cancel_meeting'])) {
     $blotter_id = $_POST['blotter_id'];
 
-    // Update the blotter report status to 'canceled' and remove the meeting date and time
+    // If Naupdate mawawala yung date and time
     $query = "UPDATE blotter_report SET status='canceled', meeting_date=NULL, meeting_time=NULL WHERE blotter_id='$blotter_id'";
     mysqli_query($connections, $query);
 
@@ -43,22 +43,20 @@ $blotter_result = mysqli_query($connections, $blotter_query);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <style>
-        /* Sidebar styles */
+        
         #sidebar {
-            width: 250px; /* Set sidebar width */
-            height: 100vh; /* Full height */
-            background-color: #f8f9fa; /* Background color */
-            border-right: 1px solid #dee2e6; /* Optional: sidebar border */
-            position: fixed; /* Keep sidebar fixed */
-            top: 0; /* Align to the top */
-            left: 0; /* Align to the left */
+            width: 250px; 
+            height: 100vh; 
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
             z-index: 1000; /* Ensure the sidebar is above other content */
         }
 
-        /* Content styles */
         #content {
             margin-left: 250px; /* Set margin for content to avoid overlap */
-            padding: 20px; /* Add padding for content */
         }
     </style>
 </head>
@@ -68,8 +66,11 @@ $blotter_result = mysqli_query($connections, $blotter_query);
             <img src="../logonav.png" alt="Logo" class="img-fluid">
         </div>
         <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none text-dark"><i class="fas fa-home"></i> Admin Dashboard</a></li>
-            <li><a href="logout.php" class="text-decoration-none text-dark"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="dashboard.php"><i class="fas fa-home"></i> Admin Dashboard</a></li>
+            <li><a href="staff.php"><i class="fas fa-home"></i> Manage Staff</a></li>
+            <li><a href="announcement.php"><i class="fas fa-home"></i> Manage Announcement</a></li>
+            <li><a href="manage_blotter_report.php"><i class="fas fa-home"></i> Manage Blotter Report</a></li>
+            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
     <div id="content">

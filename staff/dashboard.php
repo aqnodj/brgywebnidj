@@ -8,15 +8,15 @@
     <script defer src="script.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Sidebar styles */
+        
         #sidebar {
-            width: 250px; /* Set sidebar width */
-            height: 100vh; /* Full height */
-            background-color: #f8f9fa; /* Background color */
-            border-right: 1px solid #dee2e6; /* Optional: sidebar border */
-            position: fixed; /* Keep sidebar fixed */
-            top: 0; /* Align to the top */
-            left: 0; /* Align to the left */
+            width: 250px; 
+            height: 100vh; 
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
             z-index: 1000; /* Ensure the sidebar is above other content */
         }
 

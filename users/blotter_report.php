@@ -1,6 +1,6 @@
 <?php
-session_start(); // Start the session
-include '../connections.php'; // Include the database connection
+session_start();
+include '../connections.php';
 
 // Check the connection
 if (!$connections) {
@@ -29,13 +29,13 @@ if (isset($_POST['submit_report'])) {
         header("Location: blotter_report.php?message=1");
         exit();
     } else {
-        // Handle query error
+        
         echo "Error: " . mysqli_error($connections);
     }
 }
 
-// Fetch the user's blotter reports
-$user_id = $_SESSION['user_id']; // Assuming user_id is stored in session
+// fetch the user's blotter report
+$user_id = $_SESSION['user_id']; 
 $reports_query = "SELECT br.* FROM blotter_report br WHERE br.user_id = '$user_id' ORDER BY br.created_at DESC";
 $reports_result = mysqli_query($connections, $reports_query);
 ?>
@@ -51,22 +51,21 @@ $reports_result = mysqli_query($connections, $reports_query);
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Include SweetAlert -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Sidebar styles */
+        
         #sidebar {
-            width: 250px; /* Set sidebar width */
-            height: 100vh; /* Full height */
-            background-color: #f8f9fa; /* Background color */
-            border-right: 1px solid #dee2e6; /* Optional: sidebar border */
-            position: fixed; /* Keep sidebar fixed */
-            top: 0; /* Align to the top */
-            left: 0; /* Align to the left */
+            width: 250px; 
+            height: 100vh; 
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
             z-index: 1000; /* Ensure the sidebar is above other content */
         }
 
-        /* Content styles */
+        
         #content {
             margin-left: 250px; /* Set margin for content to avoid overlap */
-            padding: 20px; /* Add padding for content */
         }
     </style>
 </head>
@@ -77,7 +76,8 @@ $reports_result = mysqli_query($connections, $reports_query);
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> User Dashboard</a></li>
-            <li><a href="blotter_report.php"><i class="fas fa-file-alt"></i> Report Blotter</a></li>
+            <li><a href="blotter_report.php"><i class="fas fa-home"></i> Report Blotter</a></li>
+            <li><a href="view_announcement.php"><i class="fas fa-home"></i> Announcement</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
@@ -85,7 +85,7 @@ $reports_result = mysqli_query($connections, $reports_query);
         <div class="container">
             <h2 class="my-4">Report a Blotter</h2>
 
-            <!-- Blotter report submission form -->
+            <!-- Blotter report sub form-->
             <form id="blotterForm" method="POST" action="blotter_report.php" class="mb-4">
                 <input type="hidden" name="submit_report" value="1"> <!-- Hidden input to trigger form submission -->
                 <div class="form-group">
@@ -100,7 +100,7 @@ $reports_result = mysqli_query($connections, $reports_query);
                 <button type="button" id="submitReportBtn" class="btn btn-primary">Submit Report</button>
             </form>
 
-            <!-- Success message -->
+      
             <script>
                 // Check for success message
                 <?php if (isset($_GET['message'])): ?>
@@ -114,7 +114,7 @@ $reports_result = mysqli_query($connections, $reports_query);
                     }
                 <?php endif; ?>
 
-                // SweetAlert confirmation before submitting
+                
                 document.getElementById('submitReportBtn').addEventListener('click', function() {
                     Swal.fire({
                         title: 'Are you sure?',
