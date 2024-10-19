@@ -125,7 +125,27 @@ $staff = mysqli_fetch_all($result, MYSQLI_ASSOC);
             const modal = new bootstrap.Modal(document.getElementById('addModal'));
             modal.show();
         }
+        
     </script>
+
+<style>
+        /* Sidebar styles */
+        #sidebar {
+            width: 250px; /* Set sidebar width */
+            height: 100vh; /* Full height */
+            background-color: #f8f9fa; /* Background color */
+            border-right: 1px solid #dee2e6; /* Optional: sidebar border */
+            position: fixed; /* Keep sidebar fixed */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            z-index: 1000; /* Ensure the sidebar is above other content */
+        }
+
+        /* Content styles */
+        #content {
+            margin-left: 250px; /* Set margin for content to avoid overlap */
+        }
+    </style>
 </head>
 <body>
     <div id="sidebar">
@@ -140,7 +160,7 @@ $staff = mysqli_fetch_all($result, MYSQLI_ASSOC);
         </ul>
     </div>
     <div id="content" class="container mt-4">
-        <button id="toggle-btn" class="btn btn-secondary"><i class="fas fa-bars"></i></button>
+       
         <h1>Manage Staff</h1>
 
         <!-- Notification -->

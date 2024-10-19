@@ -10,35 +10,38 @@
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
     <style>
-        /* Additional CSS for dynamic margin adjustment */
-        #content {
-            transition: margin-left 0.3s; /* Smooth transition for margin adjustment */
-        }
+        /* Sidebar styles */
         #sidebar {
             width: 250px; /* Set sidebar width */
-            transition: margin-left 0.3s; /* Smooth transition for sidebar */
+            height: 100vh; /* Full height */
+            background-color: #f8f9fa; /* Background color */
+            border-right: 1px solid #dee2e6; /* Optional: sidebar border */
+            position: fixed; /* Keep sidebar fixed */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            z-index: 1000; /* Ensure the sidebar is above other content */
         }
-        #sidebar.hidden {
-            margin-left: -250px; /* Hide sidebar offscreen */
+
+        /* Content styles */
+        #content {
+            margin-left: 250px; /* Set margin for content to avoid overlap */
         }
     </style>
 </head>
 <body>
-    <div id="sidebar" class="hidden">
+    <div id="sidebar">
         <div class="logo">
             <img src="../logonav.png" alt="Logo">
         </div>
         <ul>
             <li><a href="dashboard.php"><i class="fas fa-home"></i> Admin Dashboard</a></li>
             <li><a href="staff.php"><i class="fas fa-users"></i> Manage Staff</a></li>
-            <li><a href="announcement.php"><i class="fas fa-users"></i> Manage Announcement</a></li>
+            <li><a href="announcement.php"><i class="fas fa-bullhorn"></i> Manage Announcement</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
     
-    <div id="content" style="margin-left: 0;">
-        <button id="toggle-btn" class="btn btn-primary mt-3" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
-
+    <div id="content">
         <div class="row mt-4">
             <!-- Announcement Form (left side) -->
             <div class="col-lg-4">
@@ -126,20 +129,6 @@
     </div>
 
     <script>
-        // Function to toggle sidebar visibility
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            const content = document.getElementById('content');
-
-            if (sidebar.classList.contains('hidden')) {
-                sidebar.classList.remove('hidden');
-                content.style.marginLeft = '250px'; // Adjust margin when sidebar is open
-            } else {
-                sidebar.classList.add('hidden');
-                content.style.marginLeft = '0'; // Reset margin when sidebar is closed
-            }
-        }
-
         // Populate the form with announcement data for editing
         function editAnnouncement(id, message) {
             document.getElementById('announcementId').value = id;

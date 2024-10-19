@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Password verification
             if (password_verify($password, $db_password)) {
                 // Set session variable
-                $_SESSION["id"] = $user_id;
+                $_SESSION["user_id"] = $user_id;
 
                 // Redirect depending on account type
                 if ($db_account_type == "1") {
@@ -57,14 +57,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($check_staff_row > 0) {
                 // If email exists in 'staff' table
                 $row = mysqli_fetch_assoc($check_staff_email);
-                $staff_id = $row["id"];
+                $staff_id = $row["staff_id"];
                 $db_password = $row["password"];
                 $db_account_type = $row["account_type"];
 
                 // Password verification
                 if (password_verify($password, $db_password)) {
                     // Set session variable
-                    $_SESSION["id"] = $staff_id;
+                    $_SESSION["staff_id"] = $staff_id;
 
                     // Redirect depending on account type (assuming staff uses account_type too)
                     if ($db_account_type == "1") {
