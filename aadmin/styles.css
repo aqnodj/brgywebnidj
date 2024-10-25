@@ -119,20 +119,6 @@ body {
 #sidebar ul::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.7); 
 }
-#sidebar {
-    width: 250px; /* Set sidebar width */
-    height: 100vh; /* Full height */
-    background-color: #f8f9fa; /* Background color */
-    border-right: 1px solid #dee2e6; /* Optional: sidebar border */
-    position: fixed; /* Keep sidebar fixed */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    z-index: 1000; /* Ensure the sidebar is above other content */
-}
 
-/* Content styles */
-#content {
-    margin-left: 250px; /* Set margin for content to avoid overlap */
-}
 
 

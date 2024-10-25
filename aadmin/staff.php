@@ -2,6 +2,14 @@
 session_start();
 include '../connections.php'; 
 
+
+// Access for Admin Account only
+if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "1") {
+    // Redirect to login page or show an error
+    header("Location: ../login.php");
+    exit();
+}
+
 // Add Staff
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     $last_name = $_POST['last_name'];
@@ -10,18 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     $contact_number = $_POST['contact_number'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT); 
-    $house_no = $_POST['house_no'];
-    $street = $_POST['street'];
-    $barangay = $_POST['barangay'];
-    $municipality = $_POST['municipality'];
     $position = $_POST['position'];
     $age = $_POST['age'];
     $sex = $_POST['sex'];
     $account_type = 2;  // Set account type to 2 for staff
 
     // Insert into the staff table
-    $query_staff = "INSERT INTO staff (last_name, first_name, middle_name, contact_number, email, password, house_no, street, barangay, municipality, position, age, sex, account_type) 
-              VALUES ('$last_name', '$first_name', '$middle_name', '$contact_number', '$email', '$password', '$house_no', '$street', '$barangay', '$municipality', '$position', $age, '$sex', $account_type)";
+    $query_staff = "INSERT INTO staff (last_name, first_name, middle_name, contact_number, email, password, position, age, sex, account_type) 
+              VALUES ('$last_name', '$first_name', '$middle_name', '$contact_number', '$email', '$password', '$position', $age, '$sex', $account_type)";
     
     if (mysqli_query($connections, $query_staff)) {
         // Set success message
@@ -49,15 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     $middle_name = $_POST['middle_name'];
     $contact_number = $_POST['contact_number'];
     $email = $_POST['email'];
-    $house_no = $_POST['house_no'];
-    $street = $_POST['street'];
-    $barangay = $_POST['barangay'];
-    $municipality = $_POST['municipality'];
     $position = $_POST['position'];
     $age = $_POST['age'];
     $sex = $_POST['sex'];
 
-    $query = "UPDATE staff SET last_name='$last_name', first_name='$first_name', middle_name='$middle_name', contact_number='$contact_number', email='$email', house_no='$house_no', street='$street', barangay='$barangay', municipality='$municipality', position='$position', age=$age, sex='$sex' WHERE id=$id";
+    $query = "UPDATE staff SET last_name='$last_name', first_name='$first_name', middle_name='$middle_name', contact_number='$contact_number', email='$email', position='$position', age=$age, sex='$sex' WHERE id=$id";
 
     if (mysqli_query($connections, $query)) {
         $_SESSION['message'] = "Staff member updated successfully."; // Set success message
@@ -108,10 +108,7 @@ $staff = mysqli_fetch_all($result, MYSQLI_ASSOC);
             document.getElementById('updateMiddleName').value = member.middle_name;
             document.getElementById('updateContactNumber').value = member.contact_number;
             document.getElementById('updateEmail').value = member.email;
-            document.getElementById('updateHouseNo').value = member.house_no;
-            document.getElementById('updateStreet').value = member.street;
-            document.getElementById('updateBarangay').value = member.barangay;
-            document.getElementById('updateMunicipality').value = member.municipality;
+           
             document.getElementById('updatePosition').value = member.position;
             document.getElementById('updateAge').value = member.age;
             document.getElementById('updateSex').value = member.sex;
@@ -222,14 +219,8 @@ $staff = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         <input type="email" name="email" class="form-control" placeholder="Email" required>
                         <h7>Password:</h7>
                         <input type="password" name="password" class="form-control" placeholder="Password" required>
-                        <h7>House No:</h7>
-                        <input type="text" name="house_no" class="form-control" placeholder="House No" required>
-                        <h7>Street:</h7>
-                        <input type="text" name="street" class="form-control" placeholder="Street" required>
-                        <h7>Barangay:</h7>
-                        <input type="text" name="barangay" class="form-control" placeholder="Barangay" required>
-                        <h7>Municipality:</h7>
-                        <input type="text" name="municipality" class="form-control" placeholder="Municipality" required>
+                       
+                       
                         <h7>Position:</h7>
                         <input type="text" name="position" class="form-control" placeholder="Position" required>
                         <h7>Age:</h7>
@@ -271,14 +262,7 @@ $staff = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         <input type="text" name="contact_number" id="updateContactNumber" class="form-control" required>
                         <h7>Email:</h7>
                         <input type="email" name="email" id="updateEmail" class="form-control" required>
-                        <h7>House No:</h7>
-                        <input type="text" name="house_no" id="updateHouseNo" class="form-control" required>
-                        <h7>Street:</h7>
-                        <input type="text" name="street" id="updateStreet" class="form-control" required>
-                        <h7>Barangay:</h7>
-                        <input type="text" name="barangay" id="updateBarangay" class="form-control" required>
-                        <h7>Municipality:</h7>
-                        <input type="text" name="municipality" id="updateMunicipality" class="form-control" required>
+                   
                         <h7>Position:</h7>
                         <input type="text" name="position" id="updatePosition" class="form-control" required>
                         <h7>Age:</h7>

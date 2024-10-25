@@ -1,6 +1,17 @@
 <?php
 include '../connections.php';
 
+
+
+session_start(); // Start the session
+
+// Access for Admin Account only
+if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "1") {
+    // Redirect to login page or show an error
+    header("Location: ../login.php");
+    exit();
+}
+
 // Check if a form is submitted
 if (isset($_POST['assign_meeting'])) {
     $blotter_id = $_POST['blotter_id'];
@@ -16,11 +27,11 @@ if (isset($_POST['assign_meeting'])) {
     exit();
 }
 
-// Check kung yung cancel ay naisubmit
+// Check if the cancel button is submitted
 if (isset($_POST['cancel_meeting'])) {
     $blotter_id = $_POST['blotter_id'];
 
-    // If Naupdate mawawala yung date and time
+    // If canceled, remove the date and time
     $query = "UPDATE blotter_report SET status='canceled', meeting_date=NULL, meeting_time=NULL WHERE blotter_id='$blotter_id'";
     mysqli_query($connections, $query);
 
@@ -40,12 +51,10 @@ $blotter_result = mysqli_query($connections, $blotter_query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Blotter Reports</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <style>
-        
         #sidebar {
-            width: 250px; 
+            width: 230px; 
             height: 100vh; 
             background-color: #f8f9fa;
             border-right: 1px solid #dee2e6; 
@@ -89,12 +98,13 @@ $blotter_result = mysqli_query($connections, $blotter_query);
         </script>
 
         <div class="table-responsive">
-            <table class="table table-striped table-bordered">
-                <thead class="table-light">
+            <table class="table">
+                <thead>
                     <tr>
                         <th>Firstname</th>
                         <th>Lastname</th>
                         <th>Report</th>
+                        <th>Reason</th>
                         <th>Status</th>
                         <th>Meeting Date</th>
                         <th>Meeting Time</th>
@@ -107,20 +117,23 @@ $blotter_result = mysqli_query($connections, $blotter_query);
                         <td><?= htmlspecialchars($row['firstname']) ?></td>
                         <td><?= htmlspecialchars($row['lastname']) ?></td>
                         <td><?= htmlspecialchars($row['report_content']) ?></td>
+                        <td><?= htmlspecialchars($row['reason']) ?></td>
                         <td><?= ucfirst(htmlspecialchars($row['status'])) ?></td>
                         <td><?= $row['meeting_date'] ?: 'N/A' ?></td>
                         <td><?= $row['meeting_time'] ?: 'N/A' ?></td>
                         <td>
-                            <form method="POST" action="manage_blotter_report.php" style="display:inline-block;">
-                                <input type="hidden" name="blotter_id" value="<?= $row['blotter_id'] ?>">
-                                <input type="date" name="meeting_date" required class="form-control d-inline" style="width: auto;">
-                                <input type="time" name="meeting_time" required class="form-control d-inline" style="width: auto;">
-                                <button type="submit" name="assign_meeting" class="btn btn-primary" onclick="return confirm('Are you sure you want to assign this meeting?');">Assign</button>
-                            </form>
-                            <form method="POST" action="manage_blotter_report.php" style="display:inline-block;">
-                                <input type="hidden" name="blotter_id" value="<?= $row['blotter_id'] ?>">
-                                <button type="submit" name="cancel_meeting" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this meeting?');">Cancel</button>
-                            </form>
+                            <div class="d-flex">
+                                <form method="POST" action="manage_blotter_report.php" class="me-2">
+                                    <input type="hidden" name="blotter_id" value="<?= $row['blotter_id'] ?>">
+                                    <input type="date" name="meeting_date" required class="form-control d-inline" style="width: auto;">
+                                    <input type="time" name="meeting_time" required class="form-control d-inline" style="width: auto;">
+                                    <button type="submit" name="assign_meeting" class="btn btn-primary ms-2" onclick="return confirm('Are you sure you want to assign this meeting?');">Assign</button>
+                                </form>
+                                <form method="POST" action="manage_blotter_report.php">
+                                    <input type="hidden" name="blotter_id" value="<?= $row['blotter_id'] ?>">
+                                    <button type="submit" name="cancel_meeting" class="btn btn-danger" onclick="return confirm('Are you sure you want to cancel this meeting?');">Cancel</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                     <?php endwhile; ?>

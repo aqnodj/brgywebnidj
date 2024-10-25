@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (password_verify($password, $db_password)) {
                 // Set session variable
                 $_SESSION["user_id"] = $user_id;
-
+                $_SESSION["account_type"] = $db_account_type; // Store account type in session
                 // Redirect depending on account type
                 if ($db_account_type == "1") {
                     echo "<script>window.location.href='aadmin/dashboard.php';</script>";
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (password_verify($password, $db_password)) {
                     
                     $_SESSION["staff_id"] = $staff_id;
-
+                    $_SESSION["account_type"] = $db_account_type; // Store account type in session
                    
                     if ($db_account_type == "1") {
                         echo "<script>window.location.href='aadmin/dashboard.php';</script>";

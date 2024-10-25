@@ -7,6 +7,16 @@ if (!$connections) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
+// Access for User Account only
+if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "3") {
+    // Redirect to login page or show an error
+    header("Location: login.php");
+    exit();
+}
+
+
+
+
 // Check if the form to submit a blotter report is submitted
 if (isset($_POST['submit_report'])) {
     var_dump($_POST); // Debug: Check if the form data is being submitted

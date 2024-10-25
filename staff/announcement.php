@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-// Access for Admin Account only
-if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "1") {
+
+// Access for staff Account only
+if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "2") {
     // Redirect to login page or show an error
     header("Location: ../login.php");
     exit();
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,11 +46,10 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "1") {
             <img src="../logonav.png" alt="Logo">
         </div>
         <ul>
-            <li><a href="dashboard.php"><i class="fas fa-home"></i> Admin Dashboard</a></li>
-            <li><a href="staff.php"><i class="fas fa-home"></i> Manage Staff</a></li>
-            <li><a href="announcement.php"><i class="fas fa-home"></i> Manage Announcement</a></li>
-            <li><a href="manage_blotter_report.php"><i class="fas fa-home"></i> Manage Blotter Report</a></li>
-            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li><a href="dashboard.php"><i class="fas fa-home"></i> Staff Dashboard</a></li>
+                <li><a href="announcement.php"><i class="fas fa-bullhorn"></i> Manage Announcement</a></li>
+                <li><a href="manage_user.php"><i class="fas fa-sign-out-alt"></i> Manage Residents</a></li>
+                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
     </div>
     
     <div id="content">

@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// Access for User Account only
+if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "3") {
+    // Redirect to login page or show an error
+    header("Location: login.php");
+    exit();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
