@@ -17,7 +17,7 @@ if (!isset($_SESSION["staff_id"]) || $_SESSION["account_type"] != "2") {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Access Denied',
-                    text: 'You do not have permission to access this page.',
+                    text: 'Staff lang ang may access dito',
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {

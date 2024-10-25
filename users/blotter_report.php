@@ -23,7 +23,7 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "3") {
                 Swal.fire({
                     icon: 'warning',
                     title: 'Access Denied',
-                    text: 'You do not have permission to access this page.',
+                    text: 'Normal Acc lang ang may access dito',
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {
