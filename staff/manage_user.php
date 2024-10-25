@@ -2,13 +2,37 @@
 session_start();
 include '../connections.php'; 
 
-// Check if the user is logged in and is a staff member
+// Access for Staff Account only
 if (!isset($_SESSION["staff_id"]) || $_SESSION["account_type"] != "2") {
-    // Redirect to login page or show an error
-    header("Location: ../login.php");
+    
+    echo "<!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Access Denied</title>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Access Denied',
+                    text: 'You do not have permission to access this page.',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.history.back(); // Redirects back to the previous page
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+    </html>";
     exit();
 }
-
 // Add User
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     $first_name = $_POST['firstname'];
@@ -134,10 +158,10 @@ $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <img src="../logonav.png" alt="Logo">
         </div>
         <ul>
-                <li><a href="dashboard.php"><i class="fas fa-home"></i> Staff Dashboard</a></li>
-                <li><a href="announcement.php"><i class="fas fa-bullhorn"></i> Manage Announcement</a></li>
-                <li><a href="manage_user.php"><i class="fas fa-sign-out-alt"></i> Manage Residents</a></li>
-                <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>    
+            <li><a href="dashboard.php"><i class="fas fa-user-tie"></i> Staff Dashboard</a></li>
+            <li><a href="announcement.php"><i class="fas fa-bullhorn"></i> Manage Announcements</a></li>
+            <li><a href="manage_user.php"><i class="fas fa-users"></i> Manage Residents</a></li>
+            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>    
         </ul>
     </div>
     <div id="content" class="container mt-4">

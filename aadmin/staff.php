@@ -3,10 +3,36 @@ session_start();
 include '../connections.php'; 
 
 
+
 // Access for Admin Account only
 if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "1") {
-    // Redirect to login page or show an error
-    header("Location: ../login.php");
+   
+    echo "<!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Access Denied</title>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Access Denied',
+                    text: 'You do not have permission to access this page.',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.history.back(); // Redirects back to the previous page
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+    </html>";
     exit();
 }
 
@@ -21,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['create'])) {
     $position = $_POST['position'];
     $age = $_POST['age'];
     $sex = $_POST['sex'];
-    $account_type = 2;  // Set account type to 2 for staff
+     $account_type = 2;  //Set add acc type default type 2
 
     // Insert into the staff table
     $query_staff = "INSERT INTO staff (last_name, first_name, middle_name, contact_number, email, password, position, age, sex, account_type) 
@@ -150,10 +176,10 @@ $staff = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <img src="../logonav.png" alt="Logo">
         </div>
         <ul>
-            <li><a href="dashboard.php"><i class="fas fa-home"></i> Admin Dashboard</a></li>
-            <li><a href="staff.php"><i class="fas fa-home"></i> Manage Staff</a></li>
-            <li><a href="announcement.php"><i class="fas fa-home"></i> Manage Announcement</a></li>
-            <li><a href="manage_blotter_report.php"><i class="fas fa-home"></i> Manage Blotter Report</a></li>
+            <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a></li>
+            <li><a href="staff.php"><i class="fas fa-users-cog"></i> Manage Staff</a></li>
+            <li><a href="announcement.php"><i class="fas fa-bullhorn"></i> Manage Announcements</a></li>
+            <li><a href="manage_blotter_report.php"><i class="fas fa-file-invoice"></i> Manage Blotter Report</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>

@@ -3,12 +3,38 @@ include '../connections.php';
 
 
 
-session_start(); // Start the session
+session_start();
+
 
 // Access for Admin Account only
 if (!isset($_SESSION["user_id"]) || $_SESSION["account_type"] != "1") {
-    // Redirect to login page or show an error
-    header("Location: ../login.php");
+
+    echo "<!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Access Denied</title>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js'></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Access Denied',
+                    text: 'You do not have permission to access this page.',
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.history.back(); // Redirects back to the previous page
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+    </body>
+    </html>";
     exit();
 }
 
@@ -18,7 +44,7 @@ if (isset($_POST['assign_meeting'])) {
     $meeting_date = $_POST['meeting_date'];
     $meeting_time = $_POST['meeting_time'];
 
-    // Update the blotter report status to 'assigned' with the meeting date and time
+//    update blotter report
     $query = "UPDATE blotter_report SET status='assigned', meeting_date='$meeting_date', meeting_time='$meeting_time' WHERE blotter_id='$blotter_id'";
     mysqli_query($connections, $query);
 
@@ -75,10 +101,11 @@ $blotter_result = mysqli_query($connections, $blotter_query);
             <img src="../logonav.png" alt="Logo" class="img-fluid">
         </div>
         <ul class="list-unstyled">
-            <li><a href="dashboard.php"><i class="fas fa-home"></i> Admin Dashboard</a></li>
-            <li><a href="staff.php"><i class="fas fa-home"></i> Manage Staff</a></li>
-            <li><a href="announcement.php"><i class="fas fa-home"></i> Manage Announcement</a></li>
-            <li><a href="manage_blotter_report.php"><i class="fas fa-home"></i> Manage Blotter Report</a></li>
+
+            <li><a href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a></li>
+            <li><a href="staff.php"><i class="fas fa-users-cog"></i> Manage Staff</a></li>
+            <li><a href="announcement.php"><i class="fas fa-bullhorn"></i> Manage Announcements</a></li>
+            <li><a href="manage_blotter_report.php"><i class="fas fa-file-invoice"></i> Manage Blotter Report</a></li>
             <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>

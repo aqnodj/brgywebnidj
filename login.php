@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // Set session variable
                 $_SESSION["user_id"] = $user_id;
                 $_SESSION["account_type"] = $db_account_type; // Store account type in session
+                
                 // Redirect depending on account type
                 if ($db_account_type == "1") {
                     echo "<script>window.location.href='aadmin/dashboard.php';</script>";
